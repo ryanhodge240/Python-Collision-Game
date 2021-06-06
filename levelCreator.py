@@ -2,16 +2,21 @@ import pygame
 import constants
 
 class levels:
-    def __init__(self):
-        self.brick = pygame.image.load('brick.png')
-        self.brickRect = self.brick.get_rect()
-        self.levelDimensions = (constants.levels.LEVEL_WIDTH, constants.levels.LEVEL_HEIGHT)
 
-    def drawLevel(self, screen, levelLayout):
-        screen.fill(constants.colors.CYAN)
+    def createRect(rect, width, height):
+        rect = pygame.transform.scale(rect, (width, height)) 
+        rect = rect.get_rect()
+        return rect
 
-        for i in range(self.levelDimensions[1]):
-            for j in range(self.levelDimensions[0]):
-                if levelLayout[i*j + j] == '#':
-                    self.brickRect.topleft = (j, i)
-                    screen.blit(self.brick, self.brickRect)
+    def drawLevel(background, levelLayout):
+        levelDimensions = (constants.levels.LEVEL_WIDTH, constants.levels.LEVEL_HEIGHT)
+        brick = constants.sprites.BRICK
+        brick = pygame.transform.scale(brick, constants.sprites.BRICK_SIZE)
+        brick = brick.convert_alpha()
+
+        for i in range(levelDimensions[1]):
+            for j in range(levelDimensions[0]):
+                if levelLayout[i*levelDimensions[0] + j] == '#':
+                    background.blit(brick, (j*20, i*20))
+
+        return background

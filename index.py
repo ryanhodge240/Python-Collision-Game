@@ -1,24 +1,38 @@
 import pygame
 import sys
+
+from pygame import draw
 import constants
 import levelCreator
 
-pygame.init()
-screen = pygame.display.set_mode(constants.game.GAME_SIZE)
+def main():
+    pygame.init()
+    pygame.display.set_caption(constants.game.TITLE)
 
-drawlingLevels = levelCreator.levels
+    screen = pygame.display.set_mode(constants.game.GAME_SIZE)
 
-brick = constants.sprites.BRICK
-brickRect = brick.get_rect()
-levels = (
-    constants.levels.LEVEL_ONE,
-    constants.levels.LEVEL_TWO,
-    constants.levels.LEVEL_THREE
-)
+    background = pygame.Surface(screen.get_size())
+    background = background.convert()
+    background.fill(constants.colors.CYAN)
 
-while 1:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
+    drawlingLevels = levelCreator.levels
 
-    drawlingLevels.drawLevel(screen, levels[0])
-    pygame.display.flip()
+    levels = (
+        constants.levels.LEVEL_ONE,
+        constants.levels.LEVEL_TWO,
+        constants.levels.LEVEL_THREE
+    )
+
+    while 1:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_w and pygame.key.get_mods() & pygame.KMOD_CTRL:
+                    sys.exit()
+
+        background = levelCreator.levels.drawLevel(background, levels[0])
+        
+        screen.blit(background, (0, 0))
+        pygame.display.flip()
+
+if __name__ == '__main__': main()

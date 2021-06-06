@@ -1,14 +1,16 @@
 import pygame
 
 class game:
-    GAME_SIZE = 800, 600
-    BLOCK_GRID = GAME_SIZE[0]/10, GAME_SIZE[1]/10
+    TITLE = 'Basic Python Game'
+    GAME_SIZE = 640, 320
+    BLOCK_GRID = GAME_SIZE[0]/20, GAME_SIZE[1]/20
 
 class colors:
-    CYAN = 49, 199, 222
+    CYAN = 50, 200, 222
 
 class sprites:
-    BRICK = pygame.image.load('brick.png')
+    BRICK = pygame.image.load('./Assets/brick_block.png')
+    BRICK_SIZE = (20, 20)
 
 class levels:
 
@@ -71,6 +73,6 @@ class levels:
 
     LEVEL_WIDTH = 64
     LEVEL_HEIGHT = 16
-    LEVEL_ONE = _drawLevelOne
-    LEVEL_TWO = _drawLevelTwo
-    LEVEL_THREE = _drawLevelThree
+    LEVEL_ONE = _drawLevelOne()
+    LEVEL_TWO = _drawLevelTwo()
+    LEVEL_THREE = _drawLevelThree()
