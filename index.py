@@ -1,3 +1,4 @@
+from player import player
 import pygame
 import sys
 
@@ -9,13 +10,10 @@ def main():
     pygame.init()
     pygame.display.set_caption(constants.game.TITLE)
 
+    playerClass = player()
+
     screen = pygame.display.set_mode(constants.game.GAME_SIZE)
-
-    background = pygame.Surface(screen.get_size())
-    background = background.convert()
-    background.fill(constants.colors.CYAN)
-
-    drawlingLevels = levelCreator.levels
+    screen.fill(constants.colors.CYAN)
 
     levels = (
         constants.levels.LEVEL_ONE,
@@ -25,14 +23,25 @@ def main():
 
     while 1:
         for event in pygame.event.get():
-            if event.type == pygame.QUIT: sys.exit()
+            if event.type == pygame.QUIT: 
+                sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w and pygame.key.get_mods() & pygame.KMOD_CTRL:
                     sys.exit()
 
-        background = levelCreator.levels.drawLevel(background, levels[0])
+        screen = levelCreator.drawLevel(screen, levels[0])
+
+        # Display enemies
         
-        screen.blit(background, (0, 0))
+        # Display player
+        screen = playerClass.drawPlayer(screen)
+
+        # Control player
+
+        # Collision detection
+
+        # Action listener
+        
         pygame.display.flip()
 
 if __name__ == '__main__': main()

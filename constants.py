@@ -9,8 +9,10 @@ class colors:
     CYAN = 50, 200, 222
 
 class sprites:
-    BRICK = pygame.image.load('./Assets/brick_block.png')
     BRICK_SIZE = (20, 20)
+    BRICK = pygame.transform.scale(pygame.image.load('./Assets/brick_block.png'), (BRICK_SIZE))
+    PLAYER_SIZE = (int(619 * .1), int(941 * .1))
+    PLAYER = pygame.transform.scale(pygame.image.load('./Assets/player.png'), (PLAYER_SIZE))
 
 class levels:
 
@@ -73,6 +75,7 @@ class levels:
 
     LEVEL_WIDTH = 64
     LEVEL_HEIGHT = 16
+    LEVEL_DIMENSIONS = (LEVEL_WIDTH, LEVEL_HEIGHT)
     LEVEL_ONE = _drawLevelOne()
     LEVEL_TWO = _drawLevelTwo()
     LEVEL_THREE = _drawLevelThree()
