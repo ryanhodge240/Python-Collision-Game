@@ -1,19 +1,21 @@
-from player import player
 import pygame
 import sys
 
-from pygame import draw
 import constants
-import levelCreator
+from LevelCreator import LevelCreator
+from Player import Player
+from ControlPlayer import ControlPlayer
 
 def main():
     pygame.init()
     pygame.display.set_caption(constants.game.TITLE)
 
-    playerClass = player()
+    clock = pygame.time.Clock()
+    player = Player()
+    levelCreator = LevelCreator()
+    controlPlayer = ControlPlayer(player)
 
     screen = pygame.display.set_mode(constants.game.GAME_SIZE)
-    screen.fill(constants.colors.CYAN)
 
     levels = (
         constants.levels.LEVEL_ONE,
@@ -22,6 +24,9 @@ def main():
     )
 
     while 1:
+        clock.tick(constants.game.FRAME_RATE)
+        screen.fill(constants.colors.CYAN)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
                 sys.exit()
@@ -34,9 +39,12 @@ def main():
         # Display enemies
         
         # Display player
-        screen = playerClass.drawPlayer(screen)
+        screen = player.drawPlayer(screen)
 
         # Control player
+        player = controlPlayer.movePlayer()
+
+        # Control camera
 
         # Collision detection
 

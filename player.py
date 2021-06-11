@@ -1,11 +1,18 @@
 import pygame
-import constants
+from constants import player
 
-class player:
-    def __init__(self):
-        self.characterImage = constants.sprites.PLAYER
+class Player:
+    def __init__(self) -> None:
+        self.characterImage = player.PLAYER_SPRITE
+        self.playerX, self.playerY = player.PLAYER_DEFAULT_LOCATION
 
-    def drawPlayer(self, background):
-        background.blit(self.characterImage, (30, 30))
-
+    def drawPlayer(self, background: pygame.Surface) -> pygame.Surface: 
+        background.blit(self.characterImage, (self.playerX, self.playerY))
         return background
+
+    def setPlayerPosition(self, pos: tuple) -> None:
+        self.playerX = pos[0]
+        self.playerY = pos[1]
+
+    def getPlayerPosition(self) -> tuple:
+        return [self.playerX, self.playerY]
