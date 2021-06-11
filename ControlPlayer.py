@@ -34,7 +34,7 @@ class ControlPlayer:
         return self.player
 
     # TODO: Check for collisions
-    def jump(self):
+    def jump(self) -> None:
         self.playerPosition[1] -= self.dy
         self.dy += game.GRAVITY
 
@@ -43,6 +43,7 @@ class ControlPlayer:
             self.playerPosition[1] = player_constants.PLAYER_DEFAULT_LOCATION[1]
             self.isJumping = False
 
+    # TODO: make this fucntional
     def duck(self):
         self.playerPosition[1] += 4
 
