@@ -6,9 +6,10 @@ import pygame
 
 # Import custom classes and files
 import constants
-from level_creator import LevelCreator
-from player import Player
-from control_player import ControlPlayer
+from level_creator import level_creator
+from player import player
+from control_player import control_player
+from collision_detection import collision_detection
 
 def main():
     """The main function for the program"""
@@ -20,9 +21,6 @@ def main():
 
     # Define all the classes
     _clock = pygame.time.Clock()
-    _player = Player()
-    _level_creator = LevelCreator()
-    _control_player = ControlPlayer(_player)
 
     # Temporary way to define all the levels
     # TODO: Clean up the levels
@@ -50,19 +48,20 @@ def main():
                     running = False
 
         # Draw the level (the bricks)
-        screen = _level_creator.draw_level(screen, levels[0])
+        screen = level_creator.draw_level(screen, levels[0])
 
         # Draw enemies
 
         # Draw player
-        screen = _player.draw_player(screen)
+        screen = player.draw_player(screen)
 
         # Control player
-        _player = _control_player.move_player()
+        control_player.move_player()
 
         # Control camera
 
         # Collision detection
+        collision_detection.detect_collisions()
 
         # Action listener
 

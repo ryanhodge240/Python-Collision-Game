@@ -4,20 +4,18 @@ from __future__ import absolute_import
 import pygame
 from constants import Player as player_constants
 from constants import Game
-from player import pl
+from player import player
 
 class ControlPlayer:
     """Controls the player's movement"""
 
-    def __init__(self, player: pl):
-        self.character_image = player_constants.PLAYER_SPRITE
+    def __init__(self) -> None:
         self.d_x, self.d_y = player_constants.PLAYER_DEFAULT_SPEED
 
-        self.player = player
         self.player_position = player.get_player_position()
         self.is_jumping = False
 
-    def move_player(self) -> pygame.Surface:
+    def move_player(self) -> None:
         """Move the player's position"""
 
         keys = pygame.key.get_pressed()
@@ -34,9 +32,7 @@ class ControlPlayer:
             self.is_jumping = True
             self.d_y = player_constants.PLAYER_DEFAULT_SPEED[1]
 
-        self.player.set_player_position(self.player_position)
-
-        return self.player
+        player.set_player_position(self.player_position)
 
     # TODO: Check for collisions
     def jump(self) -> None:
@@ -51,7 +47,9 @@ class ControlPlayer:
             self.is_jumping = False
 
     # TODO: make this fucntional
-    def duck(self):
+    def duck(self) -> None:
         """Make the player duck"""
 
         self.player_position[1] += 4
+
+control_player = ControlPlayer()
