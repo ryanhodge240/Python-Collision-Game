@@ -1,10 +1,10 @@
 """Controls collisions"""
 
 from __future__ import absolute_import
-import pygame
-from constants import Game
+
 from player import player
 from level_creator import level_creator
+from control_player import control_player
 
 class CollisionDetection:
     """Controls collisions"""
@@ -15,15 +15,11 @@ class CollisionDetection:
 
     def detect_collisions(self) -> None:
         """Detect collisions"""
+        (d_x, d_y) = control_player.get_speed()
+
+        # Reference: https://www.youtube.com/watch?v=WvcNfwIl2Jw
         for brick_rect in self.brick_rects:
-            if self.player_rect.colliderect(brick_rect):
-                if abs(brick_rect.top - self.player_rect.bottom) < Game.COLLISION_THRESHOLD:
-                    player
-                if abs(brick_rect.bottom - self.player_rect.top) < Game.COLLISION_THRESHOLD:
-                    player
-                if abs(brick_rect.right - self.player_rect.left) < Game.COLLISION_THRESHOLD:
-                    player
-                if abs(brick_rect.left - self.player_rect.right) < Game.COLLISION_THRESHOLD:
-                    player
+            if brick_rect.colliderect(self.player_rect.x, self.player_rect.y + d_y, self.player_rect.width, self.player_rect.height):
+                control_player.set_speed((d_x, 0))
 
 collision_detection = CollisionDetection()

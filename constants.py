@@ -32,7 +32,7 @@ class Player:
     PLAYER_SIZE = (int(619 * 0.06), int(941 * 0.06))
     PLAYER_SPRITE = pygame.transform.scale(pygame.image.load('./Assets/player.png'), PLAYER_SIZE)
     PLAYER_DEFAULT_SPEED = (4, 8)
-    PLAYER_DEFAULT_LOCATION = (30, 185)
+    PLAYER_DEFAULT_LOCATION = (30, 165)
 
 class Levels:
     """The constants pertaining to the general game"""

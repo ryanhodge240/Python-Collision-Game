@@ -52,9 +52,6 @@ def main():
 
         # Draw enemies
 
-        # Draw player
-        screen = player.draw_player(screen)
-
         # Control player
         control_player.move_player()
 
@@ -64,6 +61,10 @@ def main():
         collision_detection.detect_collisions()
 
         # Action listener
+
+        # Draw player
+        player.set_player_position(control_player.get_player_position())
+        screen = player.draw_player(screen)
 
         # Repaint the screen
         pygame.display.flip()
